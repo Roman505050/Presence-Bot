@@ -1,4 +1,4 @@
-from enum import StrEnum, auto
+from enum import StrEnum, auto, IntEnum
 
 class Role(StrEnum):
     ADMIN = auto()
@@ -9,7 +9,7 @@ class Week(StrEnum):
     UPPER = auto()
     LOWER = auto()
 
-class Day(StrEnum):
+class Day(IntEnum):
     MONDAY = auto()
     TUESDAY = auto()
     WEDNESDAY = auto()
