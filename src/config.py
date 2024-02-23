@@ -8,6 +8,8 @@ class Settings(BaseSettings):
     DB_PASSWORD: str
     DB_NAME: str
 
+    TELEGRAM_TOKEN: str
+
     @property
     def db_uri_asyncpg(self):
         return f'postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}'
