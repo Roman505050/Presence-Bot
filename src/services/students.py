@@ -29,6 +29,8 @@ class StudentsService:
     async def get_student_for_middlewares(self, uow: IUnitOfWork, telegram_id: int) -> StudentsSchema:
         async with uow:
             student = await uow.students.get_one(telegram_id=telegram_id)
+            if student is None:
+                return None
             return StudentsSchema(
                 id=student.id,
                 first_name=student.first_name,
