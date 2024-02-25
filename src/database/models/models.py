@@ -8,9 +8,9 @@ from sqlalchemy.sql import func
 from typing import Annotated
 import datetime
 
-created_at = Annotated[datetime.datetime, mapped_column(DateTime(timezone=True), default=func.now())]
+created_at = Annotated[datetime.datetime, mapped_column(DateTime(timezone=True), default=func.timezone('Europe/Kiev', func.now()))]
 updated_at = Annotated[datetime.datetime, mapped_column(DateTime(timezone=True), 
-        default=func.now(),
-        onupdate=func.now()
+        default=func.timezone('Europe/Kiev', func.now()),
+        onupdate=func.timezone('Europe/Kiev', func.now())
     )]
 
