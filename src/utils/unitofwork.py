@@ -4,10 +4,14 @@ from typing import Type
 from src.database.core import async_session_maker
 from src.repositories.invites import InvitesRepository
 from src.repositories.students import StudentsRepository
+from src.repositories.schedule import ScheduleRepository
+from src.repositories.register import RegisterRepository
 
 class IUnitOfWork(ABC):
     invites: Type[InvitesRepository]
     students: Type[StudentsRepository]
+    schedules: Type[ScheduleRepository]
+    registers: Type[RegisterRepository]
 
     @abstractmethod
     async def __init__(self):
@@ -38,6 +42,8 @@ class UnitOfWork(IUnitOfWork):
 
         self.invites = InvitesRepository(self.session)
         self.students = StudentsRepository(self.session)
+        self.schedules = ScheduleRepository(self.session)
+        self.registers = RegisterRepository(self.session)
     
     async def __aexit__(self, *args):
         await self.rollback()
