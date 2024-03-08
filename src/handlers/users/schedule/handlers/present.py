@@ -6,6 +6,7 @@ import datetime
 from src.database.models import Register
 from src.utils.unitofwork import UnitOfWork, IUnitOfWork
 from src.schemas.students import StudentsSchema
+from src.keyboards.builder.basic import prenest_ignore
 
 from src.config import settings
 
@@ -31,4 +32,4 @@ async def present(
             return await call.answer('Час відмітки вийшов', show_alert=True)
         register.presence = True
         await uow.commit()
-        return await call.answer('Ви відмітилися', show_alert=True)
+        return await call.message.edit_reply_markup(reply_markup=prenest_ignore())
