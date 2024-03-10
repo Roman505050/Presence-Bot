@@ -1,6 +1,8 @@
 .venv
 .vscode
 .idea
+*.xlsx
+excel.py
 
 # Security files
 certs/

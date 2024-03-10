@@ -6,12 +6,14 @@ from src.repositories.invites import InvitesRepository
 from src.repositories.students import StudentsRepository
 from src.repositories.schedule import ScheduleRepository
 from src.repositories.register import RegisterRepository
+from src.repositories.group import GroupsRepository
 
 class IUnitOfWork(ABC):
     invites: Type[InvitesRepository]
     students: Type[StudentsRepository]
     schedules: Type[ScheduleRepository]
     registers: Type[RegisterRepository]
+    groups: Type[GroupsRepository]
 
     @abstractmethod
     async def __init__(self):
@@ -44,6 +46,7 @@ class UnitOfWork(IUnitOfWork):
         self.students = StudentsRepository(self.session)
         self.schedules = ScheduleRepository(self.session)
         self.registers = RegisterRepository(self.session)
+        self.groups = GroupsRepository(self.session)
     
     async def __aexit__(self, *args):
         await self.rollback()

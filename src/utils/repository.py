@@ -15,9 +15,9 @@ class AbstractRepository(ABC):
     async def get_one():
         return NotImplemented
     
-    # @abstractmethod
-    # async def get_all():
-    #     return NotImplemented
+    @abstractmethod
+    async def get_all():
+        return NotImplemented
     
     @abstractmethod
     async def update_one():
@@ -54,6 +54,11 @@ class SQLAlchemyRepository(AbstractRepository):
         if res is not None:
             return res
         return None
+    
+    async def get_all(self, **filter_by):
+        stmt = select(self.model).filter_by(**filter_by)
+        res = await self.session.execute(stmt)
+        return res.scalars().all()
     
     async def delete_one(self, **filter_by):
         stmt = delete(self.model).filter_by(**filter_by)
