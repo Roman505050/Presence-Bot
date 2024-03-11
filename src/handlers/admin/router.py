@@ -10,6 +10,7 @@ from .handlers.add_invite import (
     stop_adding_invite,
     not_text_message
 )
+# from .handlers.test.excel import test_get_excel
 
 router = Router()
 
@@ -27,3 +28,6 @@ router.message.register(stop_adding_invite, F.text == '/stop_add_invite')
 
 # Processing non-text messages
 router.message.register(not_text_message, ~F.text) 
+
+# Test get excel
+# router.message.register(test_get_excel, F.text == '/test_get_excel')
