@@ -32,3 +32,4 @@ class Schedule(Base):
     updated_at: Mapped[updated_at]
 
     group = relationship("Groups", back_populates="schedule")
+    register = relationship("Register", back_populates="schedule")

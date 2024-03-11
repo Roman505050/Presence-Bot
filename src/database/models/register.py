@@ -7,6 +7,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import (
     Mapped,
     mapped_column,
+    relationship
 )
 from src.database.models.models import (
     created_at,
@@ -26,3 +27,5 @@ class Register(Base):
     date: Mapped[datetime.date] = mapped_column(nullable=False)
     created_at: Mapped[created_at]
     updated_at: Mapped[updated_at]
+    
+    schedule = relationship("Schedule", back_populates="register")
