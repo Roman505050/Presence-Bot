@@ -2,7 +2,8 @@ from sqlalchemy import (
     Integer,
     String,
     Numeric,
-    ForeignKey
+    ForeignKey,
+    BigInteger
 )
 from sqlalchemy.orm import (
     relationship, 
@@ -25,7 +26,7 @@ if TYPE_CHECKING:
 class Groups(Base):
     __tablename__ = "Groups"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column(String(50), nullable=False)
     course: Mapped[int] = mapped_column(Numeric(1), nullable=False)
     year: Mapped[int] = mapped_column(Numeric(4), nullable=False)

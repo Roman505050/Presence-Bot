@@ -2,8 +2,7 @@ from sqlalchemy import (
     Integer,
     String,
     Boolean, 
-    ForeignKey, 
-    Numeric
+    BigInteger
 )
 from sqlalchemy.orm import (
     relationship, 
@@ -28,14 +27,14 @@ if TYPE_CHECKING:
 class Students(Base):
     __tablename__ = "Students"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
     first_name: Mapped[str] = mapped_column(String(255), nullable=False)
     last_name: Mapped[str] = mapped_column(String(255), nullable=False)
     patronymic_name: Mapped[str] = mapped_column(String(255), nullable=False)
-    username: Mapped[str | None] = mapped_column(String(255), nullable=False)
-    photo_id: Mapped[str | None] = mapped_column(String(255), nullable=False)
-    telegram_id: Mapped[int] = mapped_column(Integer, nullable=False)
-    role: Mapped[Role] = mapped_column(String(30), nullable=False, default=Role.STUDENT.value)
+    username: Mapped[str] = mapped_column(String(255), nullable=True)
+    photo_id: Mapped[str] = mapped_column(String(255), nullable=True)
+    telegram_id: Mapped[int] = mapped_column(BigInteger, nullable=False)
+    role: Mapped[Role] = mapped_column(nullable=False, default=Role.STUDENT.value)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     created_at: Mapped[created_at]
     updated_at: Mapped[updated_at]

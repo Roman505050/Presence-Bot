@@ -5,10 +5,12 @@ from src.database.models.students_groups_association import students_groups_asso
 
 from sqlalchemy import select, insert
 
+from src.schemas.students import StudentsSchema
+
 class StudentsRepository(SQLAlchemyRepository):
     model = Students
 
-    async def add_one_student(self, data: dict, group_id: int):
+    async def add_one_student(self, data: dict, group_id: int) -> StudentsSchema:
         stmt = (
             insert(self.model)
             .values(data)
@@ -29,4 +31,4 @@ class StudentsRepository(SQLAlchemyRepository):
                     groups_id = group.id
                 )
             )
-        return student
+        return StudentsSchema.model_validate(student, from_attributes=True)

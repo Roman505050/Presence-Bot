@@ -3,6 +3,7 @@ from sqlalchemy import (
     ForeignKey,
     Boolean,
     DateTime,
+    BigInteger
 )
 from sqlalchemy.orm import (
     Mapped,
@@ -20,7 +21,7 @@ import datetime
 class Register(Base):
     __tablename__ = "Register"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
     student_id: Mapped[int] = mapped_column(ForeignKey("Students.id", ondelete='CASCADE'), nullable=False)
     presence: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     schedule_id: Mapped[int] = mapped_column(ForeignKey("Schedule.id"), nullable=False)

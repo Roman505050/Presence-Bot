@@ -1,13 +1,13 @@
-from enum import StrEnum, auto, IntEnum
+from enum import StrEnum, auto, IntEnum, Enum
 
-class Role(StrEnum):
-    ADMIN = auto()
-    MONITOR = auto()
-    STUDENT = auto()
+class Role(str, Enum):
+    ADMIN = 'ADMIN'
+    MONITOR = 'MONITOR'
+    STUDENT = 'STUDENT'
 
-class Week(StrEnum):
-    UPPER = auto()
-    LOWER = auto()
+class Week(str, Enum):
+    UPPER = "UPPER"
+    LOWER = "LOWER"
 
 class Day(IntEnum):
     MONDAY = auto()

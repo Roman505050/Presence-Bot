@@ -1,16 +1,15 @@
 from src.utils.unitofwork import IUnitOfWork
 from src.schemas.students import StudentsTelegramInfoSchema, StudentsSchema
 
-from src.database.models.students import Students
-from src.services.invites import InvitesService
+from src.schemas.students import StudentsSchema
 
 class StudentsService:
-    async def add_student(self, uow: IUnitOfWork, telegram_data: StudentsTelegramInfoSchema, code: str) -> bool:
+    async def add_student(self, uow: IUnitOfWork, telegram_data: StudentsTelegramInfoSchema, code: str) -> StudentsSchema:
         async with uow:
             data = await uow.invites.get_one(code=code)
             if data is None:
                 return False
-            await uow.students.add_one_student(
+            student = await uow.students.add_one_student(
                 data={
                     'username': telegram_data.username,
                     'photo_id': telegram_data.photo_id,
@@ -24,7 +23,7 @@ class StudentsService:
             
             await uow.invites.delete_one(code=code)
             await uow.commit()
-            return True
+            return student
     
     async def get_student_for_middlewares(self, uow: IUnitOfWork, telegram_id: int) -> StudentsSchema:
         async with uow:

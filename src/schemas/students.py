@@ -4,7 +4,7 @@ import datetime
 from src.database.enums import Role
 
 class StudentsTelegramInfoSchema(BaseModel):
-    username: str
+    username: str | None
     photo_id: str | None
     telegram_id: int
 
@@ -19,8 +19,8 @@ class StudentsSchema(BaseModel):
     first_name: str
     last_name: str
     patronymic_name: str
-    username: str
-    photo_id: str
+    username: str | None
+    photo_id: str | None
     telegram_id: int
     role: Role
     is_active: bool

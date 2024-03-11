@@ -2,7 +2,8 @@ from sqlalchemy import (
     Integer,
     String,
     ForeignKey,
-    Numeric
+    Numeric,
+    BigInteger
 )
 from sqlalchemy.orm import (
     relationship, 
@@ -20,7 +21,7 @@ from src.database.enums import Week, Day
 class Schedule(Base):
     __tablename__ = "Schedule"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
     group_id: Mapped[int] = mapped_column(ForeignKey("Groups.id"), nullable=False)
     week: Mapped[Week] = mapped_column(nullable=False)
     day: Mapped[Day] = mapped_column(String(20), nullable=False)
